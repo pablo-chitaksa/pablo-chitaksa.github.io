@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PabloSite</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #000;
+            color: #00ff00;
+            font-family: 'JetBrains Mono', monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Анимированный фон с бинарным кодом */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .binary-code {
+            position: absolute;
+            color: #00ff00;
+            font-size: 1.2rem;
+            opacity: 0.7;
+            animation: float 10s infinite ease-in-out;
+        }
+        
+        /* Шапка с навигацией */
+        .header {
+            position: relative;
+            z-index: 10;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            border-bottom: 1px solid #00ff00;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            text-shadow: 0 0 10px #00ff00;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-item {
+            color: #00ffff;
+            text-decoration: none;
+            font-weight: 700;
+            padding: 5px 10px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item:hover {
+            border-color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        
+        /* Основной контент */
+        .content {
+            position: relative;
+            z-index: 10;
+            padding: 30px;
+        }
+        
+        /* Анимации */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+            }
+            to {
+                text-shadow: 0 0 15px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00;
+            }
+        }
+        
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+                text-shadow: 0 0 15px currentColor;
+            }
+            to {
+                transform: scale(1.05);
+                text-shadow: 0 0 25px currentColor;
+            }
+        }
+        
+        /* Примеры стилей для текста */
+        .glow-text {
+            text-shadow: 0 0 10px #00ff00;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        .center-text {
+            text-align: center;
+        }
+
+        .pulse-text {
+            animation: pulse 1s ease-in-out infinite alternate;
+        }
+        
+        /* Цветовые варианты */
+        .text-cyan { color: #00ffff; text-shadow: 0 0 5px #00ffff; }
+        .text-magenta { color: #ff00ff; text-shadow: 0 0 5px #ff00ff; }
+        .text-red { color: #ff0000; text-shadow: 0 0 5px #ff0000; }
+        .text-blue { color: #0088ff; text-shadow: 0 0 5px #0088ff; }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Анимированный фон -->
+    <div class="background" id="binaryBackground"></div>
+    
+    <!-- Шапка с навигацией -->
+    <header class="header">
+        <div class="logo">PabloSite</div>
+        <nav class="nav-menu">
+            <a href="https://pablo-chitaksa.github.io" class="nav-item">Главная</a>
+            <a href="#" class="nav-item">О мне</a>
+            <a href="https://pablo-chitaksa.github.io/beforeevent/" class="nav-item">Отсчет до ивента</a>
+            <a href="#" class="nav-item">Контакты</a>
+        </nav>
+    </header>
+    
+    <!-- Основной контент -->
+    <div class="content">
+        <h1 class="glow-text center-text">Добро пожаловать на PabloSite!</h1>
+        <p class="center-text">Пока ниче нет(</p>
+    </div>
+
+    <script>
+        // Создание бинарного фона
+        function createBinaryBackground() {
+            const background = document.getElementById('binaryBackground');
+            const binaryChars = ['0', '1'];
+            
+            for (let i = 0; i < 40; i++) {
+                const binary = document.createElement('div');
+                binary.className = 'binary-code';
+                binary.textContent = Array(15).fill(0).map(() => 
+                    binaryChars[Math.floor(Math.random() * binaryChars.length)]
+                ).join('');
+                
+                binary.style.left = Math.random() * 100 + '%';
+                binary.style.top = Math.random() * 100 + '%';
+                binary.style.animationDelay = Math.random() * 10 + 's';
+                binary.style.animationDuration = (10 + Math.random() * 10) + 's';
+                
+                background.appendChild(binary);
+            }
+        }
+        
+        // Инициализация фона
+        createBinaryBackground();
+    </script>
+</body>
+</html>
