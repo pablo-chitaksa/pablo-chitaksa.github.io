@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PabloSite</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="minestyles.css">
+</head>
+<body>
+    <!-- Анимированный фон -->
+    <div class="background" id="binaryBackground"></div>
+    
+    <!-- Шапка с навигацией -->
+    <header class="header">
+        <div class="logo">PabloSite</div>
+        <nav class="nav-menu">
+            <a href="index.html" class="nav-item">Главная</a>
+            <a href="socials.html" class="nav-item">Мои соцсети</a>
+            <a href="mineserver.html" class="nav-item">Мой сервер по майнкрафту</a>
+        </nav>
+    </header>
+    
+    <!-- Основной контент -->
+    <div class="content">
+        <h1 class="glow-text center-text">СЕРВЕР MINESWORD!</h1>
+        <p class="center-text">Пока еще в разработке, сезон 1</p>
+    </div>
+
+    <script>
+        // Создание бинарного фона
+        function createBinaryBackground() {
+            const background = document.getElementById('binaryBackground');
+            const binaryChars = ['0', '1'];
+            
+            for (let i = 0; i < 40; i++) {
+                const binary = document.createElement('div');
+                binary.className = 'binary-code';
+                binary.textContent = Array(15).fill(0).map(() => 
+                    binaryChars[Math.floor(Math.random() * binaryChars.length)]
+                ).join('');
+                
+                binary.style.left = Math.random() * 100 + '%';
+                binary.style.top = Math.random() * 100 + '%';
+                binary.style.animationDelay = Math.random() * 10 + 's';
+                binary.style.animationDuration = (10 + Math.random() * 10) + 's';
+                
+                background.appendChild(binary);
+            }
+        }
+        
+        // Инициализация фона
+        createBinaryBackground();
+    </script>
+</body>
+</html>
+
